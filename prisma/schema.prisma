@@ -23,7 +23,7 @@ model User {
   email            String
   name             String
   surname          String?
-  onboarding       Boolean  @default(false)
+  imageUrl         String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
