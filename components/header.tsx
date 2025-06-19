@@ -1,6 +1,12 @@
 "use client";
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 import { Shield } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -41,7 +47,24 @@ function Header() {
         </SignedIn>
 
         <SignedOut>
-          <SignInButton mode="modal">
+          <SignUpButton
+            mode="modal"
+            signInForceRedirectUrl={
+              process.env.NEXT_PUBLIC_SIGN_IN_REDIRECT_URL
+            }
+          >
+            <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
+              Sign Up
+            </Button>
+          </SignUpButton>
+        </SignedOut>
+        <SignedOut>
+          <SignInButton
+            signUpForceRedirectUrl={
+              process.env.NEXT_PUBLIC_SIGN_UP_REDIRECT_URL
+            }
+            mode="modal"
+          >
             <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
               Login
             </Button>
