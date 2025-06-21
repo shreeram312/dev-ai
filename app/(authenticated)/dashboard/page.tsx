@@ -4,6 +4,7 @@ import prisma from "@/lib/providers/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Receipt, Settings, Plus } from "lucide-react";
+import AIChat from "@/components/dashboard/ai-chat";
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -126,6 +127,8 @@ export default async function DashboardPage() {
               </div>
             </div>
           </div>
+
+          <AIChat />
         </div>
       </div>
     </div>
