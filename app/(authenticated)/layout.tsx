@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import CustomTrigger from "@/components/dashboard/custom-trigger";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -18,9 +19,9 @@ export default async function Layout({
             <div className="flex flex-1 items-center gap-4">
               <CustomTrigger />
 
-              {/* <div className="sm:ml-auto  ml-auto -mx-2">
-              <ModeToggle />
-            </div> */}
+              <div className="sm:ml-auto  ml-auto -mx-2">
+                <ThemeToggle />
+              </div>
             </div>
           </header>
 

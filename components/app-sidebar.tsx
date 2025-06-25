@@ -12,6 +12,10 @@ import {
   Lightbulb,
   Users,
   Trophy,
+  Pencil,
+  PencilRuler,
+  MoreHorizontal,
+  Link as LinkIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -33,6 +37,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 // Menu items for AI Learning Companion
 const items = [
@@ -42,14 +47,14 @@ const items = [
     icon: Home,
   },
   {
-    title: "AI Tutor",
-    url: "/ai-tutor",
-    icon: Brain,
+    title: "Excalidraw",
+    url: "/excalidraw",
+    icon: PencilRuler,
   },
   {
-    title: "Courses",
-    url: "/courses",
-    icon: BookOpen,
+    title: "Links",
+    url: "/links",
+    icon: LinkIcon,
   },
   {
     title: "Goals",
