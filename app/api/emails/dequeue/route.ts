@@ -13,7 +13,7 @@ export const POST = verifySignatureAppRouter(async (req: Request) => {
   console.log("dequeueing email", email, subject, body);
 
   await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: process.env.RESEND_DOMAIN!,
     to: email,
     subject: subject,
     html: body,
