@@ -26,4 +26,20 @@ model User {
   imageUrl         String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+
+  model Links[]
 }
+
+
+
+model Links {
+  id String @id @default(cuid())
+  url String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
