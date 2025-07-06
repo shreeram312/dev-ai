@@ -1,46 +1,20 @@
-import prisma from "@/lib/providers/prisma";
+import { openaiTask } from "@/trigger/abc";
 import { openai } from "@ai-sdk/openai";
+import { auth, tasks } from "@trigger.dev/sdk/v3";
 import { generateText, smoothStream, streamText, tool } from "ai";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-export async function POST(req: Request) {
-  const { prompt } = await req.json();
+export async function POST(request: Request) {
+  const { prompt } = await request.json();
 
-  const result = await streamText({
-    model: openai("gpt-4o-mini"),
-    tools: {
-      weather: tool({
-        description: "Get the weather in a location",
-        parameters: z.object({
-          location: z.string().describe("The location to get the weather for"),
-        }),
+  console.log(prompt, "prompt from server");
 
-        execute: async ({ location }) => ({
-          //   location,
-          //   temperature: 32,
-
-          ///make a api call to get the weather
-          temperature: 100,
-        }),
-      }),
-
-      getDataFromDatabase: tool({
-        description: "Get data from database",
-        parameters: z.object({}),
-        execute: async () => {
-          const data = await prisma.user.findMany({});
-          return data;
-        },
-      }),
-    },
+  const handle = await tasks.trigger<typeof openaiTask>(openaiTask.id, {
     prompt,
-    system:
-      "You are a helpful assistant that can answer questions and help with tasks.",
-
-    // maxSteps: 5,
-    maxSteps: 2,
   });
 
-  return result.toDataStreamResponse();
+  console.log("handle", handle);
+
+  return NextResponse.json(handle);
 }
