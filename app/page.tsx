@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { Button } from "@/components/ui/button";
 import { useSession, useUser } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import {
   ArrowRight,
   Check,
@@ -20,8 +21,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function Home() {
-  const { user } = useUser();
+export default async function Home() {
+  const user = await auth();
   return (
     <div>
       <header className="flex justify-end items-center gap-4 h-16">
