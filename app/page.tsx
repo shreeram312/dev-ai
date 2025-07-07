@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { Button } from "@/components/ui/button";
-import { useSession } from "@clerk/nextjs";
+import { useSession, useUser } from "@clerk/nextjs";
 import {
   ArrowRight,
   Check,
@@ -21,8 +21,7 @@ import {
 import Link from "next/link";
 
 export default function Home() {
-  const { session } = useSession();
-  const user = session?.user;
+  const { user } = useUser();
   return (
     <div>
       <header className="flex justify-end items-center gap-4 h-16">
