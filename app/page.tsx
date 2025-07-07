@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { Button } from "@/components/ui/button";
+import { useSession } from "@clerk/nextjs";
 import {
   ArrowRight,
   Check,
@@ -20,6 +21,8 @@ import {
 import Link from "next/link";
 
 export default function Home() {
+  const { session } = useSession();
+  const user = session?.user;
   return (
     <div>
       <header className="flex justify-end items-center gap-4 h-16">
@@ -193,15 +196,26 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex justify-center space-x-4 mt-8">
-                <Link href="/dashboard">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-                  >
-                    <Sparkles className="mr-2 h-5 w-5" />
-                    Get Started Free
-                  </Button>
-                </Link>
+                {user ? (
+                  <Link href="/dashboard">
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                    >
+                      <Sparkles className="mr-2 h-5 w-5" />
+                      Get Started Free
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href={"/signup"}>
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                    >
+                      Get Started Free
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
