@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
 import { Brain } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -32,44 +25,28 @@ function Header() {
 
       <div className="flex items-center gap-4">
         <ThemeToggle />
-        <SignedIn>
-          {pathname === "/" ? (
-            <Link href="/dashboard">
-              <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
-                Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <div></div>
-          )}
-
-          <UserButton />
-        </SignedIn>
-
-        <SignedOut>
-          <SignUpButton
-            mode="modal"
-            signInForceRedirectUrl={
-              process.env.NEXT_PUBLIC_SIGN_IN_REDIRECT_URL
-            }
-          >
+        {/* 
+        {pathname === "/" ? (
+          <Link href="/dashboard">
             <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
-              Sign Up
+              Dashboard
             </Button>
-          </SignUpButton>
-        </SignedOut>
-        <SignedOut>
-          <SignInButton
-            signUpForceRedirectUrl={
-              process.env.NEXT_PUBLIC_SIGN_UP_REDIRECT_URL
-            }
-            mode="modal"
-          >
-            <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
-              Login
-            </Button>
-          </SignInButton>
-        </SignedOut>
+          </Link>
+        ) : (
+          <div></div>
+        )} */}
+
+        <Link href="/sign-up">
+          <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
+            Sign Up
+          </Button>
+        </Link>
+
+        <Link href="/sign-in">
+          <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
+            Login
+          </Button>
+        </Link>
       </div>
     </header>
   );

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { saveLink } from "@/app/actions/links/save-link";
+// import { saveLink } from "@/app/actions/links/save-link";
 import { toast } from "sonner";
 
 const AddLinkButton = () => {
@@ -18,14 +18,14 @@ const AddLinkButton = () => {
 
     try {
       setLoading(true);
-      const link = await saveLink(url.trim());
+      // const link = await saveLink(url.trim());
 
-      if (link.status === "success") {
-        toast.success(link.message);
-        setUrl("");
-      } else {
-        toast.error(link.message);
-      }
+      // if (link.status === "success") {
+      //   toast.success(link.message);
+      //   setUrl("");
+      // } else {
+      //   toast.error(link.message);
+      // }
     } catch (err) {
       toast.error("Something went wrong.");
     } finally {

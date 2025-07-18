@@ -1,8 +1,7 @@
 import Header from "@/components/header";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { Button } from "@/components/ui/button";
-import { useSession, useUser } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+
 import {
   ArrowRight,
   Check,
@@ -22,7 +21,7 @@ import {
 import Link from "next/link";
 
 export default async function Home() {
-  const user = await auth();
+  // const user = await auth();
   return (
     <div>
       <header className="flex justify-end items-center gap-4 h-16">
@@ -195,7 +194,7 @@ export default async function Home() {
                   accelerating their careers
                 </p>
               </div>
-              <div className="flex justify-center space-x-4 mt-8">
+              {/* <div className="flex justify-center space-x-4 mt-8">
                 {user ? (
                   <Link href="/dashboard">
                     <Button
@@ -216,7 +215,7 @@ export default async function Home() {
                     </Button>
                   </Link>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

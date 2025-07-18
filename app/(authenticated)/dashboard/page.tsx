@@ -1,5 +1,3 @@
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import prisma from "@/lib/providers/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -8,25 +6,12 @@ import AIChat from "@/components/dashboard/ai-chat";
 import { Suspense } from "react";
 
 export default async function DashboardPage() {
-  const user = await currentUser();
-
-  if (!user) {
-    return redirect("/");
-  }
-
-  // Get user data from database
-  const dbUser = await prisma.user.findFirst({
-    where: {
-      clerkId: user.id,
-    },
-  });
-
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-[var(--color-foreground)] mb-2">
-            Welcome back, {dbUser?.name || user.firstName || "User"}!
+            Welcome back
           </h1>
           <p className="text-[var(--color-muted-foreground)]">
             Manage your receipts and track your expenses
@@ -71,27 +56,19 @@ export default async function DashboardPage() {
                 <span className="text-[var(--color-muted-foreground)]">
                   Name:
                 </span>
-                <span className="ml-2 text-[var(--color-foreground)]">
-                  {dbUser?.name} {dbUser?.surname}
-                </span>
+                <span className="ml-2 text-[var(--color-foreground)]">...</span>
               </div>
               <div>
                 <span className="text-[var(--color-muted-foreground)]">
                   Email:
                 </span>
-                <span className="ml-2 text-[var(--color-foreground)]">
-                  {dbUser?.email}
-                </span>
+                <span className="ml-2 text-[var(--color-foreground)]">..</span>
               </div>
               <div>
                 <span className="text-[var(--color-muted-foreground)]">
                   Member since:
                 </span>
-                <span className="ml-2 text-[var(--color-foreground)]">
-                  {dbUser?.createdAt
-                    ? new Date(dbUser.createdAt).toLocaleDateString()
-                    : "N/A"}
-                </span>
+                <span className="ml-2 text-[var(--color-foreground)]">..</span>
               </div>
             </div>
           </div>
