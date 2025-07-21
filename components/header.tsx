@@ -5,10 +5,12 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
+import { authClient } from "@/lib/auth-client";
 
 function Header() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const { data: session } = authClient.useSession();
 
   return (
     <header
@@ -36,17 +38,19 @@ function Header() {
           <div></div>
         )} */}
 
-        <Link href="/sign-up">
-          <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
-            Sign Up
-          </Button>
-        </Link>
-
-        <Link href="/sign-in">
-          <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
-            Login
-          </Button>
-        </Link>
+        {session && session.user ? (
+          <Link href="/dashboard">
+            <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
+              Dashboard
+            </Button>
+          </Link>
+        ) : (
+          <Link href="/sign-in">
+            <Button className="rounded-[var(--radius-md)] text-sm px-5 py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
+              Sign In
+            </Button>
+          </Link>
+        )}
       </div>
     </header>
   );

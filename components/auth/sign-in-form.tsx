@@ -1,6 +1,7 @@
 "use client";
 
-import { signInWithGoogle } from "@/app/actions/auth/sign-up-google";
+import { signInWithGoogle } from "@/actions/auth/sign-up-google";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -48,7 +49,7 @@ export default function SignInForm() {
         onRequest: () => {
           toast("Signing in...");
         },
-        onSuccess: () => {
+        onSuccess: async () => {
           form.reset();
           redirect("/dashboard");
         },

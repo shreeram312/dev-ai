@@ -1,4 +1,5 @@
-import SignUpForm from "@/components/auth/signup-form";
+
+import SignUpForm from "@/components/auth/sign-up-form";
 import Image from "next/image";
 
 export default function SignUp() {
@@ -24,7 +25,7 @@ export default function SignUp() {
       {/* Right side - Sign Up Form */}
       <div className="flex w-full lg:w-1/2 items-center justify-center p-6 md:p-10">
         <div className="flex w-full max-w-sm flex-col gap-6">
-          <SignUpForm />
+          <SignUpForm/>
         </div>
       </div>
     </div>

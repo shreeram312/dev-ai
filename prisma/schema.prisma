@@ -16,15 +16,15 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String
+  id        String   @id @unique @default(cuid())
+  email     String   @unique
   name      String
   surname   String?
   imageUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  model         Links[]
+  links         Links[]
   emailVerified Boolean
   image         String?
   sessions      Session[]

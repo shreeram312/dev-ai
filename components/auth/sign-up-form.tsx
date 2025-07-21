@@ -1,6 +1,5 @@
 "use client";
 
-import { signInWithGoogle } from "@/app/actions/auth/sign-up-google";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,6 +25,7 @@ import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { signInWithGoogle } from "@/actions/auth/sign-up-google";
 
 export default function SignUpForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,7 +49,7 @@ export default function SignUpForm() {
         onRequest: () => {
           toast("Signing up...");
         },
-        onSuccess: () => {
+        onSuccess: async () => {
           form.reset();
           redirect("/sign-in");
         },
