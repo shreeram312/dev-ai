@@ -42,7 +42,10 @@ export default function RootLayout({
           <CustomNextLoader />
           <Toaster />
 
-          <main>{children}</main>
+          <main>
+           
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>
