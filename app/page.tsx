@@ -25,13 +25,11 @@ export default async function Home() {
             Your <span className="text-primary">AI-Powered</span> Developer
             Companion
           </h1>
-
           {/* Sub-headline/Tagline */}
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-serif max-w-2xl mx-auto leading-relaxed">
+          {/* <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-serif max-w-2xl mx-auto leading-relaxed">
             Boost your productivity, get instant coding help, and streamline
             your workflow with intelligent assistance.
-          </p>
-
+          </p> */}
           {/* Call to Action Button */}
           <Link href="/sign-up" passHref className="inline-block">
             <Button className="mt-6 px-10 py-4 text-lg sm:text-xl font-semibold  bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition transform hover:-translate-y-1 rounded-[var(--radius-md)]">

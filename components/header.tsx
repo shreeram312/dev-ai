@@ -3,9 +3,16 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 async function Header() {
-  const { data: session } = await authClient.getSession();
+  "use server";
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  console.log(session);
 
   return (
     <div>
@@ -34,7 +41,7 @@ async function Header() {
             <div></div>
           )} */}
 
-            {session && session.user ? (
+            {session ? (
               <Link href="/dashboard">
                 <Button className="rounded-[var(--radius-md)] text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 font-medium text-[var(--color-primary-foreground)] bg-[var(--color-primary)] hover:bg-opacity-90 transition">
                   Dashboard
