@@ -28,6 +28,7 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarFooter,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import Link from "next/link";
@@ -97,8 +98,10 @@ export function AppSidebar() {
   const pathname = usePathname();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { state } = useSidebar();
   const darkLogo = "/logos/logo_dark_mode.png";
   const lightLogo = "/logos/greg_final.png";
+  const isCollapsed = state === "collapsed";
 
   useEffect(() => {
     setMounted(true);
@@ -107,23 +110,26 @@ export function AppSidebar() {
   return (
     <Sidebar
       variant="floating"
+      collapsible="icon"
       className="border-r border-border/40 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60"
     >
       <SidebarHeader className=" ">
         <div className="flex items-center justify-center">
           <Brain className="w-16 h-16 text-[var(--color-primary)] group-hover:rotate-6 transition-transform duration-300" />
         </div>
-        <div className="text-center mt-3">
-          <h3 className="text-sm font-semibold text-foreground">DEV-AI</h3>
-          <p className="text-xs text-muted-foreground">
-            Your Personal AI Learning Companion
-          </p>
-        </div>
+        {!isCollapsed && (
+          <div className="text-center mt-3">
+            <h3 className="text-sm font-semibold text-foreground">DEV-AI</h3>
+            <p className="text-xs text-muted-foreground">
+              Your Personal AI Learning Companion
+            </p>
+          </div>
+        )}
       </SidebarHeader>
 
       <SidebarSeparator className="mx-4 bg-border/50" />
 
-      <SidebarContent className="px-4">
+      <SidebarContent className={cn("px-4", isCollapsed && "px-0")}>
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu className="space-y-2">
@@ -135,16 +141,24 @@ export function AppSidebar() {
                   <SidebarMenuItem className="relative" key={item.title}>
                     <SidebarMenuButton
                       className={cn(
-                        "w-full gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group",
+                        "w-full gap-3 py-2.5 rounded-lg transition-all duration-200 group",
                         "hover:bg-accent/50",
                         isActive
                           ? "bg-primary/10 text-primary border border-primary/20"
-                          : "hover:text-foreground"
+                          : "hover:text-foreground",
+                        isCollapsed ? "justify-center px-0" : "px-3"
                       )}
                       asChild
                       isActive={isActive}
+                      tooltip={item.title}
                     >
-                      <Link href={item.url} className="flex items-center">
+                      <Link
+                        href={item.url}
+                        className={cn(
+                          "flex items-center",
+                          isCollapsed ? "justify-center w-full" : "gap-3"
+                        )}
+                      >
                         <item.icon
                           size={18}
                           className={cn(
@@ -152,14 +166,18 @@ export function AppSidebar() {
                             isActive ? "text-primary" : "text-muted-foreground "
                           )}
                         />
-                        <span
-                          className={cn(
-                            "text-sm font-medium transition-colors duration-200",
-                            isActive ? "text-primary" : "text-muted-foreground "
-                          )}
-                        >
-                          {item.title}
-                        </span>
+                        {!isCollapsed && (
+                          <span
+                            className={cn(
+                              "text-sm font-medium transition-colors duration-200",
+                              isActive
+                                ? "text-primary"
+                                : "text-muted-foreground "
+                            )}
+                          >
+                            {item.title}
+                          </span>
+                        )}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -170,15 +188,18 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 pt-2">
+      <SidebarFooter className={cn("p-4 pt-2", isCollapsed && "p-2")}>
         <Button
           variant="ghost"
           size="sm"
-          className="w-full gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-destructive/10 hover:text-destructive"
+          className={cn(
+            "w-full gap-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-destructive/10 hover:text-destructive",
+            isCollapsed ? "justify-center px-0" : "px-3"
+          )}
           onClick={() => {}}
         >
           <LogOut size={18} />
-          <span>Sign Out</span>
+          {!isCollapsed && <span>Sign Out</span>}
         </Button>
       </SidebarFooter>
     </Sidebar>
