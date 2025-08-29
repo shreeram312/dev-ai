@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TriggerProvider } from "@/lib/providers/trigger";
-import { openaiTask } from "@/trigger/abc";
+// import { openaiTask } from "@/trigger/abc";
 import { useChat } from "@ai-sdk/react";
 import { useRealtimeRun } from "@trigger.dev/react-hooks";
 import React, { useState } from "react";
