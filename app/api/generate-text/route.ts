@@ -1,4 +1,3 @@
-import { openaiTask } from "@/trigger/abc";
 import { openai } from "@ai-sdk/openai";
 import { auth, tasks } from "@trigger.dev/sdk/v3";
 import { generateText, smoothStream, streamText, tool } from "ai";
@@ -10,11 +9,13 @@ export async function POST(request: Request) {
 
   console.log(prompt, "prompt from server");
 
-  const handle = await tasks.trigger<typeof openaiTask>(openaiTask.id, {
-    prompt,
+  // const handle = await tasks.trigger<typeof openaiTask>(openaiTask.id, {
+  //   prompt,
+  // });
+
+  // console.log("handle", handle);
+
+  return NextResponse.json({
+    message: "Hello World",
   });
-
-  console.log("handle", handle);
-
-  return NextResponse.json(handle);
 }
